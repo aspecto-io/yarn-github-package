@@ -1,0 +1,20 @@
+name: 'Install Github Package using Yarn'
+author: aspecto-io
+description: 'Create required npmrc, run yarn and delete npmrc.'
+inputs:
+  token:
+    description: 'Github Personal Access Token with read:packages scope'
+    required: true
+  registry:
+    description: 'Name of the github registry'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.token }}
+branding:
+  icon: package
+  color: orange
+  
