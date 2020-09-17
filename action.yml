@@ -10,11 +10,24 @@ inputs:
     required: true
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.token }}
-    - ${{ inputs.registry }}
+  using: 'composite'
+  steps:
+    - run: echo "Creating .npmrc"
+      shell: bash
+    - run: echo "@${{ inputs.registry }}:registry=https://npm.pkg.github.com" >> ~/.npmrc
+      shell: bash
+    - run: echo "//npm.pkg.github.com/:_authToken=${{ inputs.token }}" >> ~/.npmrc
+      shell: bash
+    - run: cat ~/.npmrc
+      shell: bash
+    - run: echo "Installing"
+      shell: bash
+    - run: yarn
+      shell: bash
+    - run: echo "Removing .npmrc"
+      shell: bash
+    - run: rm ~/.npmrc
+      shell: bash
 branding:
   icon: package
   color: orange

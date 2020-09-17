@@ -15,7 +15,7 @@ This action is running yarn while making sure you can access private npm registr
 
 ## Example usage
 ```
-uses: actions/yarn-github-package@v1
+uses: actions/yarn-github-package@v1.2
 with:
   token: '***'
   registry: 'aspecto-io'
